@@ -1,0 +1,5 @@
+{% for category, message in get_flashed_messages(with_categories=True) %}
+<div class="border border-3 border-{{ category }} mb-4 px-3 py-2 rounded text-{{ category }}">
+    <span>{{ message }}</span>
+</div>
+{% endfor %}

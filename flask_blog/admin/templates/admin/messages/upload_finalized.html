@@ -1,0 +1,7 @@
+{% if is_new_file %}
+<p>Upload of file <strong>{{ filename }}</strong> completed successfully.</p>
+{% else %}
+<p>This file already existed with filename <strong>{{ filename }}</strong>. The uploaded file has been replaced with the existing one to prevent duplicates.</p>
+{% endif %}
+
+<p>You may now close this window.</p>

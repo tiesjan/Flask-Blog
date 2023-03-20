@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    {% block page_stylesheets %}
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.x/dist/css/bootstrap-grid.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.x/dist/css/bootstrap-utilities.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.x/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@picocss/pico@1.x/css/pico.min.css">
+    <link rel="stylesheet" href="{{ url_for('admin.static', filename='core.css') }}">
+    {% endblock %}
+    {% block page_scripts %}
+    <script src="{{ url_for('admin.static', filename='core.js') }}"></script>
+    {% endblock %}
+    <title>{{ page_title }} - Admin</title>
+</head>
+<body>
+    {% block page_container %}
+    <main class="container">
+        <div class="d-md-flex align-items-baseline justify-content-between">
+            <div class="order-last text-end text-muted">
+                <small>
+                    {% if current_user.is_authenticated %}
+                    <i class="bi bi-person"></i>
+                    <span>{{ current_user.email_address }}</span>
+                    <i class="bi bi-dot"></i>
+                    <a class="secondary text-reset" href="{{ url_for('admin.web.logout') }}">Logout</a>
+                    <i class="bi bi-dot"></i>
+                    {% endif %}
+                    <i id="theme-toggle" class="bi bi-circle-half" title="Toggle theme"></i>
+                </small>
+            </div>
+            <hgroup>
+                <h1>{{ page_title }}</h1>
+                <nav aria-label="breadcrumb">{% block page_breadcrumbs %}{% endblock %}</nav>
+            </hgroup>
+        </div>
+
+        {% include "admin/partials/flashed_messages.html" %}
+
+        {% block page_content %}{% endblock %}
+    </main>
+    {% endblock %}
+</body>
+</html>

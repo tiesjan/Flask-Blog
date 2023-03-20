@@ -1,0 +1,28 @@
+{% extends "admin/base.html" %}
+
+{% block page_breadcrumbs %}
+<ul>
+    <li><a href="{{ url_for('admin.web.index') }}">Index</a></li>
+    <li><a href="{{ url_for('admin.web.blog_post_list') }}">Posts</a></li>
+    <li><a href="{{ url_for('admin.web.blog_post_form', object_id=post.id) }}">Post: {{ post.title }}</a></li>
+    <li>Delete</li>
+</ul>
+{% endblock %}
+
+{% block page_content %}
+<form method="POST" novalidate>
+    {{ form.csrf_token() }}
+
+    {% if form.form_errors %}{{ render_admin_form_errors(form.form_errors) }}{% endif %}
+
+    <section>
+        <p>Are you sure you want to permanently delete the post: <strong>{{ post.title }}</strong>?</p>
+        <p class="text-danger"><strong>Warning: this cannot be undone!</strong></p>
+    </section>
+
+    <div class="row">
+        <div class="col-md">{{ render_admin_form_field(form.confirm_delete) }}</div>
+        <div class="col-md">{{ render_admin_form_field(form.cancel_delete, class="secondary") }}</div>
+    </div>
+</form>
+{% endblock %}

@@ -1,0 +1,42 @@
+<h1><a href="/">Website</a></h1>
+
+<h2>Featured posts</h2>
+<ul>
+    {% for post in featured_posts %}
+    <li><a href="{{ url_for('blog.post', category_slug=post.category.slug, post_slug=post.slug) }}">{{ post.title }}</a></li>
+    {% else %}
+    <li>No featured posts.</li>
+    {% endfor %}
+</ul>
+
+<h2>Latest posts</h2>
+<ul>
+    {% for post in latest_posts %}
+    <li><a href="{{ url_for('blog.post', category_slug=post.category.slug, post_slug=post.slug) }}">{{ post.title }}</a> &mdash; <em>{{ post.published_at|format_datetime }}</em></li>
+    {% else %}
+    <li>No latest posts.</li>
+    {% endfor %}
+</ul>
+
+<h2>Posts by category</h2>
+<ul>
+    {% for category, posts in posts_by_category.items() %}
+    <li>
+        <span>Category: <strong><a href="{{ url_for('blog.category', category_slug=category.slug) }}">{{ category.name }}</a></strong></span>
+        <ul>
+            {% for post in posts %}
+            <li><a href="{{ url_for('blog.post', category_slug=category.slug, post_slug=post.slug) }}">{{ post.title }}</a></li>
+            {% endfor %}
+        </ul>
+    </li>
+    {% endfor %}
+</ul>
+
+<h2>Categories</h2>
+<ul>
+    {% for category in all_categories %}
+    <li><a href="{{ url_for('blog.category', category_slug=category.slug) }}">{{ category.name }}</a></li>
+    {% else %}
+    No categories.
+    {% endfor %}
+</ul>

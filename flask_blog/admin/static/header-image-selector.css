@@ -1,0 +1,9 @@
+#header-image-selector > #header-image-selector-actions {
+    vertical-align: top;
+}
+
+#header-image-selector > #header-image-selector-preview {
+    height: 9rem;
+    object-fit: cover;
+    width: 16rem;
+}

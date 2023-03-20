@@ -1,0 +1,11 @@
+<div class="grid mb-3">
+    <div id="header-image-selector">
+        {{ rendered_integer_field }}
+        <img class="border rounded {{ 'border-danger' if integer_field.errors|length > 0 else 'border-secondary' }}" id="header-image-selector-preview" src="{{ image_url }}">
+        <span id="header-image-selector-actions">
+            <button id="header-image-selector-change" class="bi bi-pencil d-inline secondary outline w-auto" type="button" tabindex="-1" data-hx-get="{{ url_for('admin.api.upload_image') }}" data-hx-params="none" data-hx-target="#header-image-selector-dialogs" data-hx-swap="beforeend"></button>
+            <button id="header-image-selector-clear" class="bi bi-x-lg d-inline secondary outline w-auto" type="button" tabindex="-1" data-empty-image-data-url="{{ empty_image_data_url }}"></button>
+        </span>
+        <div id="header-image-selector-dialogs"></div>
+    </div>
+</div>

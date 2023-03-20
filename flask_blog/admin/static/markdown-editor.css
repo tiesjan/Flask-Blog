@@ -1,0 +1,44 @@
+#markdown-editor {
+    position: relative;
+}
+
+#markdown-editor > textarea {
+    font-size: 0.875rem;
+    min-height: 20rem;
+    resize: vertical;
+}
+
+#markdown-editor > #markdown-editor-preview {
+    background-color: var(--background-color);
+    margin: 0;
+    overflow-x: hidden;
+    overflow-y: scroll;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    height: 100%;
+    width: 100%;
+    z-index: 1;
+}
+
+#markdown-editor > #markdown-editor-preview img {
+    width: 50%;
+}
+
+#markdown-editor > #markdown-editor-actions {
+    margin: var(--spacing);
+    opacity: 0.6;
+    position: absolute;
+    top: 0;
+    transition: opacity var(--transition);
+    right: 0;
+    z-index: 2;
+}
+
+#markdown-editor > #markdown-editor-actions > button {
+    background-color: var(--form-element-background-color);
+}
+
+#markdown-editor > #markdown-editor-actions:hover {
+    opacity: 0.925;
+}

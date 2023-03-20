@@ -1,0 +1,11 @@
+<div class="grid mb-3">
+    <div id="markdown-editor" data-hx-post="{{ url_for('admin.api.render_html') }}" data-hx-params="{{ textarea_field.name }}" data-hx-trigger="preview" data-hx-target="#markdown-editor-preview" data-hx-ext="loading-states,map-params" data-map-params="{{ textarea_field.name }}:markdown_text" data-hx-disinherit="*">
+        {{ rendered_textarea_field }}
+        <blockquote id="markdown-editor-preview" hidden data-loading-aria-busy></blockquote>
+        <div id="markdown-editor-actions">
+            <button id="markdown-editor-image-selector" class="bi bi-image d-inline secondary outline w-auto" type="button" tabindex="-1" data-loading-disable data-hx-get="{{ url_for('admin.api.upload_image') }}" data-hx-params="none" data-hx-target="#markdown-editor-dialogs" data-hx-swap="beforeend"></button>
+            <button id="markdown-editor-preview-switch" class="bi bi-search d-inline secondary outline w-auto" type="button" tabindex="-1" data-loading-disable></button>
+        </div>
+        <div id="markdown-editor-dialogs"></div>
+    </div>
+</div>

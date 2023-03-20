@@ -1,0 +1,38 @@
+{% extends "admin/base.html" %}
+
+{% block page_breadcrumbs %}
+<ul>
+    <li><a href="{{ url_for('admin.web.index') }}">Index</a></li>
+    <li>Posts</li>
+</ul>
+{% endblock %}
+
+{% block page_content %}
+<fieldset class="d-flex align-items-baseline mb-3">
+    {% if posts | length > 0 %}<div class="flex-grow-1">Click on a post to edit:</div>{% endif %}
+    <div><a href="{{ url_for('admin.web.blog_post_form') }}" role="button">Create post</a></div>
+</fieldset>
+
+{% if posts | length > 0 %}
+<table>
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Category</th>
+            <th>Published</th>
+            <th>Last updated</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for post in posts %}
+        <tr>
+            <td><a href="{{ url_for('admin.web.blog_post_form', object_id=post.id) }}">{{ post.title }}</a></td>
+            <td>{{ post.category.name }}</td>
+            <td>{{ render_admin_truthy_icon(post.published) }}</td>
+            <td>{{ post.updated_at | format_datetime }}</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endif %}
+{% endblock %}

@@ -1,0 +1,18 @@
+<fieldset>
+    {% if form_field.widget.input_type == "submit" %}
+    {#- For input type "submit", only render the field. -#}
+    {{ form_field(**kwargs) }}
+    {% elif form_field.widget.input_type in ("checkbox", "radio") %}
+    {#- For input type "checkbox" or "radio", render the field before the label. -#}
+    {{ form_field(**kwargs) }}{{ form_field.label() }}
+    {% else %}
+    {#- For other input types, render the label before the field. -#}
+    {{ form_field.label() }}{{ form_field(**kwargs) }}
+    {% endif %}
+
+    {% if form_field.errors|length > 0 %}
+    {{ render_admin_form_errors(form_field.errors) }}
+    {% else %}
+    <small>{{ form_field.description }}</small>
+    {% endif %}
+</fieldset>

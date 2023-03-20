@@ -1,0 +1,7 @@
+nav[aria-label="breadcrumb"] > ul {
+    font-size: 0.875rem;
+}
+
+#theme-toggle {
+    cursor: pointer;
+}

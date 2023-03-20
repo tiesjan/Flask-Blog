@@ -1,0 +1,11 @@
+<form data-hx-post="{{ url_for('admin.api.order_blog_categories') }}" data-hx-trigger="end" data-hx-swap="outerHTML" data-hx-ext="loading-states">
+    <div id="sortable-categories">
+        {% for category in categories %}
+        <div class="category border border-2 border-secondary mb-1 py-2 rounded">
+            <i class="category-handle bi bi-grip-vertical px-2" title="Drag to reorder categories." data-loading-class="category-loading"></i>
+            <a href="{{ url_for('admin.web.blog_category_form', object_id=category.id) }}">{{ category.name }}</a>
+            <input type="hidden" name="category_id" value="{{ category.id }}">
+        </div>
+        {% endfor %}
+    </div>
+</form>

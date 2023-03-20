@@ -1,0 +1,12 @@
+.category.ghost {
+    border-style: dotted !important;
+}
+
+.category > .category-handle {
+    cursor: move;
+}
+
+.category > .category-handle.category-loading {
+    cursor: progress;
+    opacity: 60%;
+}

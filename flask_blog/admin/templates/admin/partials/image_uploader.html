@@ -1,0 +1,20 @@
+{% if with_dialog %}
+<dialog id="image-uploader-dialog" open>
+    <article class="w-100">
+        <header><a href="#close" class="close"></a><span>Upload image</span></header>
+        <p>
+{% endif %}
+            <form enctype="multipart/form-data" data-hx-post="{{ url_for('admin.api.upload_image') }}" data-hx-swap="outerHTML" novalidate>
+                <div id="client-side-error" class="border border-3 border-danger mb-4 px-3 py-2 rounded text-danger" hidden></div>
+
+                {{ form.hidden_tag() }}
+
+                {{ render_admin_form_field(form.image_file) }}
+
+                {{ render_admin_form_field(form.submit_upload) }}
+            </form>
+{% if with_dialog %}
+        </p>
+    </article>
+</dialog>
+{% endif %}

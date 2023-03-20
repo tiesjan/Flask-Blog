@@ -1,0 +1,30 @@
+{% extends "admin/base.html" %}
+
+{% block page_stylesheets %}
+{{ super() }}
+<link rel="stylesheet" href="{{ url_for('admin.static', filename='category-sorter.css') }}">
+{% endblock %}
+
+{% block page_scripts %}
+{{ super() }}
+<script src="https://cdn.jsdelivr.net/npm/htmx.org@1.x/dist/htmx.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/htmx.org@1.x/dist/ext/loading-states.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/sortablejs@1.x/Sortable.min.js"></script>
+<script src="{{ url_for('admin.static', filename='category-sorter.js') }}"></script>
+{% endblock %}
+
+{% block page_breadcrumbs %}
+<ul>
+    <li><a href="{{ url_for('admin.web.index') }}">Index</a></li>
+    <li>Categories</li>
+</ul>
+{% endblock %}
+
+{% block page_content %}
+<fieldset class="d-flex align-items-baseline mb-3">
+    {% if categories | length > 0 %}<div class="flex-grow-1">Click on a category to edit:</div>{% endif %}
+    <div><a href="{{ url_for('admin.web.blog_category_form') }}" role="button">Create category</a></div>
+</fieldset>
+
+{% include "admin/partials/sortable_categories.html" %}
+{% endblock %}

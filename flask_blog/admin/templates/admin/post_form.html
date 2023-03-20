@@ -1,0 +1,71 @@
+{% extends "admin/base.html" %}
+
+{% block page_stylesheets %}
+{{ super() }}
+<link rel="stylesheet" href="{{ url_for('admin.static', filename='header-image-selector.css') }}">
+<link rel="stylesheet" href="{{ url_for('admin.static', filename='markdown-editor.css') }}">
+{% endblock %}
+
+{% block page_scripts %}
+{{ super() }}
+<script src="https://cdn.jsdelivr.net/npm/htmx.org@1.x/dist/htmx.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/htmx.org@1.x/dist/ext/loading-states.js"></script>
+<script src="{{ url_for('admin.static', filename='header-image-selector.js') }}"></script>
+<script src="{{ url_for('admin.static', filename='markdown-editor.js') }}"></script>
+{% endblock %}
+
+{% block page_breadcrumbs %}
+<ul>
+    <li><a href="{{ url_for('admin.web.index') }}">Index</a></li>
+    <li><a href="{{ url_for('admin.web.blog_post_list') }}">Posts</a></li>
+    <li>{% if post.id is not none %}Post: {{ post.title }}{% else %}New post{% endif %}</li>
+</ul>
+{% endblock %}
+
+{% block page_content %}
+<form method="POST" novalidate>
+    {{ form.csrf_token() }}
+
+    {% if form.form_errors %}{{ render_admin_form_errors(form.form_errors) }}{% endif %}
+
+    <fieldset>
+        <div class="d-flex align-items-baseline">
+            <div class="flex-grow-1">{{ render_admin_form_field(form.published, role="switch") }}</div>
+            {% if post.id is not none %}
+            <div><a class="contrast outline" href="{{ url_for('admin.web.blog_post_delete', object_id=post.id) }}" role="button">Delete</a></div>
+            {% endif %}
+        </div>
+    </fieldset>
+
+    {{ render_admin_form_field(form.title) }}
+
+    {{ render_admin_form_field(form.content) }}
+
+    {{ render_admin_form_field(form.tagline) }}
+
+    <div class="row">
+        <div class="col-md">{{ render_admin_form_field(form.slug) }}</div>
+        <div class="col-md">{{ render_admin_form_field(form.category_id) }}</div>
+    </div>
+
+    <div class="row">
+        <div class="col-md">{{ render_admin_form_field(form.header_image_file_id) }}</div>
+        <div class="col-md">{{ render_admin_form_field(form.featured, role="switch") }}</div>
+    </div>
+
+    <div class="row">
+        <div class="col-md">{{ render_admin_form_field(form.save_changes) }}</div>
+        <div class="col-md">{{ render_admin_form_field(form.cancel_changes, class="secondary") }}</div>
+    </div>
+
+    {% if post.id is not none %}
+    <hr>
+
+    <div class="row text-muted">
+        <div class="col-lg text-lg-start"><small>Published: {% if post.published_at is not none %}{{ post.published_at | format_datetime }}{% else %}&mdash;{% endif %}</small></div>
+        <div class="col-lg text-lg-center"><small>Created: {{ post.created_at | format_datetime }}</small></div>
+        <div class="col-lg text-lg-end"><small>Last updated: {{ post.updated_at | format_datetime }}</small></div>
+    </div>
+    {% endif %}
+</form>
+{% endblock %}
