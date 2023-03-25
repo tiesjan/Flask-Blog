@@ -70,9 +70,9 @@
 
                 let errorText;
 
-                const maxContentSizeHeader = event.detail.xhr.getResponseHeader("Max-Content-Length");
-                if (maxContentSizeHeader !== null) {
-                    errorText = "Please upload a file smaller than " + maxContentSizeHeader + " in size.";
+                const maxRequestContentLength = event.detail.xhr.getResponseHeader("Max-Request-Content-Length");
+                if (maxRequestContentLength !== null) {
+                    errorText = "Please upload a file smaller than " + maxRequestContentLength + " in size.";
                 }
                 else {
                     errorText = "Please upload a file smaller in size.";
